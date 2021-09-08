@@ -1,0 +1,3 @@
+[submodule "larastagram"]
+	path = larastagram
+	url = https://github.com/RikuHirose/larastagram.git

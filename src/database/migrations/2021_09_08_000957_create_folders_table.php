@@ -17,6 +17,7 @@ class CreateFoldersTable extends Migration
             $table->increments('id');
             $table->string('title', 20);
             $table->timestamps();
+//            $table->softDeletes();
 
         });
     }

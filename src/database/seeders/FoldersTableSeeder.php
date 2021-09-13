@@ -14,11 +14,15 @@ class FoldersTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('folders')->delete();
+        $user = DB::table('users')->first(); // ★
         $titles = ['プライベート', '仕事', '旅行'];
+
 
         foreach ($titles as $title) {
             DB::table('folders')->insert([
                 'title' => $title,
+                'user_id' => $user->id, // ★
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

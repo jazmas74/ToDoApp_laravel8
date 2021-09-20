@@ -47,7 +47,7 @@
                             <tr>
                                 <td>{{ $task->title }}</td>
                                 <td>
-                                    <span class="label　{{ $task->status_class }}">{{ $task->status_label }}</span>
+                                    <span class="label {{ $task->status_class }}">{{ $task->status_label }}</span>
                                 </td>
                                 <td>{{ $task->formatted_due_date }}</td>
                                 <td>

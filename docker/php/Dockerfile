@@ -1,5 +1,4 @@
-FROM php:7.3.11-fpm
-
+FROM php:8.0.10-fpm
 # COPY php.ini
 COPY ./php.ini /usr/local/etc/php/php.ini
 
@@ -17,10 +16,12 @@ RUN apt-get update && apt-get install -y \
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 #nodejs install
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - \
-    && apt-get update \
-    && apt-get install -y nodejs
+# COPY --from=node:16 /usr/local/bin /usr/local/bin
+# COPY --from=node:16 /usr/local/lib /usr/local/lib
 
-RUN npm install npm@latest -g
+# RUN npm install npm@latest -g
+
+#xdebug install
+#RUN pecl install xdebug-3.0.4 && docker-php-ext-enable xdebug
 
 WORKDIR /var/www/html

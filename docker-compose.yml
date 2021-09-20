@@ -1,0 +1,44 @@
+version: '3.8'
+# https://qiita.com/naokit-dev/items/26b6a542571639e975ee
+# https://qiita.com/ysd_marrrr/items/e8a50c43cff87951385c
+services:
+  app:
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    volumes:
+      - ./src/:/var/www/html
+    environment:
+      - DB_HOST = db
+      - DB_USERNAME = my_user
+      - DB_DATABASE = my_database
+      - DB_PASSWORD = my_password
+
+  web:
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./src/:/var/www/html
+    depends_on:
+      - db
+      - app
+
+  db:
+    image: docker.io/bitnami/mariadb:10.2
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=my_user
+      - MARIADB_DATABASE=my_database
+      - MARIADB_PASSWORD=my_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./logs:/var/log/mysql
+      

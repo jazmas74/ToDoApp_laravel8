@@ -8,7 +8,7 @@ php8 + nginx + MariaDB
 
 ## 使い方
 ```
-git clone
-docker-compose up -d
+git clone https://github.com/jazmas74/ToDoApp_laravel8.git;
+docker-compose up -d;
 docker-compose exec app composer update
 ```
